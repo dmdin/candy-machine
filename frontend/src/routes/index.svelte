@@ -13,8 +13,8 @@
 </svelte:head>
 
 <main>
-  <!-- <Landing/> -->
-  <ConnectButton/>
+  <Landing/>
+  <!-- <ConnectButton/>
   {#if $pubKey}
     <div class="flex justify-center">
       <div style="min-width: 440px;">
@@ -22,7 +22,7 @@
         <TokenList/>
       </div>
     </div>
-  {/if}
+  {/if} -->
 </main>
 
 <style>

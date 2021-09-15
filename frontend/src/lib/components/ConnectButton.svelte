@@ -9,8 +9,8 @@
 
 <main>
 	{#if $pubKey}
-		<div class="btn btn-primary" on:click={disconnect}><p>{shortAddress}</p></div>
+		<div class="btn btn-primary" on:click={disconnect}>{shortAddress}</div>
 	{:else}
-		<div class="btn btn-primary" on:click={connect}><p>Connect</p></div>
+		<div class="btn btn-primary" on:click={connect}>Connect</div>
 	{/if}
 </main>
