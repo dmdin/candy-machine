@@ -12,14 +12,16 @@
 			class="rounded-full h-6"
 		/>
 		<div>
-			SOL
+			<p>SOL</p>
 			{#await balance}
 				...
 			{:then _balance}
-				{(_balance / 1e9).toLocaleString('en', {
-					minimumFractionDigits: 2,
-					maximumFractionDigits: 2
-				})}
+				<p>
+					{(_balance / 1e9).toLocaleString('en', {
+						minimumFractionDigits: 2,
+						maximumFractionDigits: 2
+					})}
+				</p>
 			{:catch err}
 				{err.message}
 			{/await}
