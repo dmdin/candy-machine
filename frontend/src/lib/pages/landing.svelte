@@ -11,8 +11,12 @@
 
 <div class="background">
   <div class="circleYellow"/>
-  <div class="circleGreen"/>  
-  <div class="circleOrange"/>  
+  <div class="circleOrange"/> 
+  <div class="circleGreen"/> 
+  <div class="circleGreenTwo"/>
+  <div class="circleOrangeTwo"/>
+  <div class="circleYellowThree"/>
+  <div class="circleGreenThree"/>  
 </div>
 
 <div class="mainBackground">
@@ -41,15 +45,25 @@
     {/if}
 
     <div class="firstField">
-      <div>
-        <h1 class="cun">SLIMY FROGES</h1>
-        <p class="mont">
-          Я, в своём познании настолько преисполнился, 
-          что я как будто бы уже 100 триллионов миллиардов лет, <nobr style="font-weight: 600;">понимаешь</nobr>?
-        </p>
-      </div>
+        <div>
+          <h1 class="cun">SLIMY FROGES</h1>
+          <p class="mont">
+            Я, в своём познании настолько преисполнился, 
+            что я как будто бы уже 100 триллионов миллиардов лет, <nobr style="font-weight: 600;">понимаешь</nobr>?
+          </p>
+        </div>
+        <img style="height: 60vh; margin-top: 2rem; border-radius: 4rem;" src="https://preview.redd.it/u0ti5q49c8e71.jpg?width=1024&format=pjpg&auto=webp&s=2c5f241ff362dd36585ccb43dc8fc82d85e25f30" alt="">
+    </div>
+    <div class="SecondField" style="height: 100vh;">
       
     </div>
+    <div class="SecondField" style="height: 100vh;">
+      
+    </div>
+    <div class="SecondField" style="height: 100vh;">
+      
+    </div>
+
   </div>
 </div>
 
@@ -58,7 +72,7 @@
     z-index: 1;
     background: rgba(255, 255, 255, 0.01);
   }
-  .circleYellow{
+  .circleOrange{
     position: absolute;
     width: 100vh;
     height: 100vh;
@@ -76,15 +90,49 @@
     left: -10vh;
     background-color: #6AB04C;
   }
-
-  .circleOrange{
+  .circleGreenTwo{
+    position: absolute;
+    width: 100vh;
+    height: 100vh;
+    border-radius: 100vh;
+    top: 150vh;
+    left: -50vh;
+    background-color: #6AB04C;
+  }
+  .circleOrangeTwo{
     position: absolute;
     width: 25vw;
     height: 50vw;
-    /* border-radius: 100vw 0 0 100vw; */
+    border-radius: 50vw 0 0 50vw;
+    left: 75vw;
+    top: 125vw;
+    background-color: #F9CA24;
+  }
+  .circleYellow{
+    position: absolute;
+    width: 25vw;
+    height: 50vw;
     border-radius: 50vw 0 0 50vw;
     left: 75vw;
     top: 25vw;
+    background-color: rgb(238, 255, 0);
+  }
+  .circleGreenThree{
+    position: absolute;
+    width: 50vh;
+    height: 50vh;
+    border-radius: 0vh 100vh 0vh 0vh;
+    top: 350vh;
+    left: 0vh;
+    background-color: #6AB04C;
+  }
+  .circleYellowThree{
+    position: absolute;
+    width: 40vh;
+    height: 40vh;
+    border-radius: 0vh 100vh 0vh 0vh;
+    top: 360vh;
+    left: 30vh;
     background-color: rgb(238, 255, 0);
   }
 
@@ -93,10 +141,9 @@
     z-index: 3;
     backdrop-filter: blur(150px);
     width: 100vw;
-    height: 200vh;
+    height: 400vh;
   }
   .main{
-    /* background-color: turquoise; */
     max-width: 1440px;
     margin: auto;
   }
@@ -132,6 +179,7 @@
     margin-right: 2rem;
     height: 85vh;
     display: flex;
+    justify-content: space-between;
   }
   .firstField div{
     /* margin-top: auto; */
@@ -158,15 +206,18 @@
     .circleGreen{
       left: -30vh;
     }
-    .circleOrange{
+    .circleYellow{
       display: none;
     }
     .addObj{
       width: 6rem;
     }
+    .firstField{
+      flex-direction: column;
+    }
   }
   @media (max-width: 800px){
-    .circleYellow{
+    .circleOrange{
       width: 50vh;
       height: 50vh;
       top: 40vh;
@@ -182,9 +233,10 @@
       margin-left: 0.5rem;
       margin-right: 0.5rem;
     }
+    
   }
   @media (max-device-width: 600px){
-    .circleYellow{
+    .circleOrange{
       width: 80vh;
       height: 80vh;
       top: 10vh;
@@ -197,7 +249,7 @@
       top: 0;
       left: 30vw;
     }
-    .circleOrange{
+    .circleYellow{
       display: none;
     }
     .mainBackground{
