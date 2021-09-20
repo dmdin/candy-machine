@@ -17,6 +17,7 @@ main{
   font-style: normal;
   font-display: swap;
 }
+
 p, h1, h2, h3 {
   color: azure;
 }
@@ -27,9 +28,19 @@ p, h1, h2, h3 {
   margin-top: auto;
   margin-bottom: auto;
 }
+/* для текста */
 .mont{
   font-family: 'Montserrat', sans-serif;
 }
 .cun{
   font-family: 'Cunia', sans-serif;
+}
+.text-sup-big{
+  font-size: 75px;
+}
+.text-big{
+  font-size: 40px;
+}
+.text-normal{
+  font-size: 24px;
 }
