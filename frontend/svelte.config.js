@@ -14,31 +14,31 @@ const config = {
         target: '#svelte',
         adapter: vercel()
     },
-    // vite: {
-    // 	ssr: {
-    // 		external: [
-    // 			/@babel\/runtime/,
-    // 			'bn.js',
-    // 			'borsh',
-    // 			'bs58',
-    // 			'buffer-layout',
-    // 			'crypto-hash',
-    // 			'jayson/lib/client/browser',
-    // 			'js-sha3',
-    // 			'node-fetch',
-    // 			'rpc-websockets',
-    // 			'secp256k1',
-    // 			'superstruct',
-    // 			'tweetnacl'
-    // 		]
-    // 	},
-    // 	resolve: {
-    // 		mainFields: ['browser', 'module', 'main', 'jsnext'],
-    // 		dedupe: ['bn.js', 'buffer'],
-    // 		extensions: ['.js', '.ts'],
-    // 		preferBuiltins: false
-    // 	}
-    // }
+    vite: {
+    	ssr: {
+    		external: [
+    			/@babel\/runtime/,
+    			'bn.js',
+    			'borsh',
+    			'bs58',
+    			'buffer-layout',
+    			'crypto-hash',
+    			'jayson/lib/client/browser',
+    			'js-sha3',
+    			'node-fetch',
+    			'rpc-websockets',
+    			'secp256k1',
+    			'superstruct',
+    			'tweetnacl'
+    		]
+    	},
+    	resolve: {
+    		mainFields: ['browser', 'module', 'main', 'jsnext'],
+    		dedupe: ['bn.js', 'buffer'],
+    		extensions: ['.js', '.ts'],
+    		preferBuiltins: false
+    	}
+    }
 };
 
 export default config;
