@@ -2,11 +2,11 @@ from copy import deepcopy
 
 template = {
     'name': None,
-    'symbol': '',
+    'symbol': 'PIXELART',
     'description': None,
     'seller_fee_basis_points': 5,
     'image': None,
-    'external_url': 'https://solflare.com',
+    'external_url': None,
     'attributes': [
         {
             'trait_type': 'web',
@@ -22,16 +22,20 @@ template = {
         }
     ],
     'collection': {
-        'name': 'Mark collection',
-        'family': 'Mark'
+        'name': 'Pixel art collection',
+        'family': 'pixelart'
     },
     'properties': {
-        'files': [],
+        'files': [],  # will be filled
         'category': 'image',
         'creators': [
             {
                 'address': '5gotnvW7pGeq7k4H52U9MzinUaMYsHTMEAiiu1sQd3AD',
-                'share': 100
+                'share': 80
+            },
+            {
+                'address': 'FZ9e7QZbNbXfR163NZidP14FakLpoAh4FzitXFh3U8uE',
+                'share': 20
             }
         ]
     }
@@ -45,6 +49,7 @@ def gen_json(*args, index, name, description):
     res['name'] = name
     res['description'] = description
     res['image'] = filename
+    res['external_url'] = filename
 
     res['properties']['files'].append({
         'uri': filename,

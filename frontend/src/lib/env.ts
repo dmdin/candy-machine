@@ -1,0 +1,9 @@
+export const vars = {
+  SELF_URL: import.meta.env.VITE_URL,
+  CANDY_MACHINE_CONFIG: import.meta.env.VITE_CANDY_MACHINE_CONFIG,
+  CANDY_MACHINE_ID: import.meta.env.VITE_CANDY_MACHINE_ID,
+  CANDY_START_DATE: import.meta.env.VITE_CANDY_START_DATE,
+  SOLANA_NETWORK: import.meta.env.VITE_SOLANA_NETWORK,
+  SOLANA_RPC_HOST: import.meta.env.VITE_SOLANA_RPC_HOST,
+  TREASURY_ADDRESS: import.meta.env.VITE_TREASURY_ADDRESS,
+};

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { pubKey } from '$lib/stores/signer';
-	import { getBalance } from '$lib/scripts/provider';
+	import { pubKey } from '$lib/wallet/stores';
+	import { getBalance } from '$lib/provider';
 
 	$: balance = $pubKey && getBalance($pubKey);
 </script>
@@ -10,18 +10,17 @@
 		<img
 			src="https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/So11111111111111111111111111111111111111112/logo.png"
 			class="rounded-full h-6"
+			alt="solana token"
 		/>
 		<div>
-			<p>SOL</p>
+			SOL
 			{#await balance}
 				...
 			{:then _balance}
-				<p>
-					{(_balance / 1e9).toLocaleString('en', {
-						minimumFractionDigits: 2,
-						maximumFractionDigits: 2
-					})}
-				</p>
+				{(_balance / 1e9).toLocaleString('en', {
+					minimumFractionDigits: 2,
+					maximumFractionDigits: 2
+				})}
 			{:catch err}
 				{err.message}
 			{/await}

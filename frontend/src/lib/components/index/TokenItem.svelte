@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { formatPrice, fromLamports } from '$lib/scripts/number';
-	import type { TokenAccount, TokenMap } from '$lib/scripts/tokens';
+	import { formatPrice, fromLamports } from '$lib/number';
+	import type { TokenInfo, TokenMap } from '$lib/tokens';
 
-	export let account: TokenAccount;
+	export let account: TokenInfo;
 	export let tokenMap: Promise<TokenMap>;
 
 	$: tokenInfo = undefined;
 
-	onMount(() => {
+	onMount(async () => {
 		tokenMap.then((tokens) => {
 			tokenInfo = tokens.get(account.mint.toBase58());
 		});
@@ -33,4 +33,6 @@
 			</div>
 		</div>
 	</div>
+{:else}
+	Unknown Token: {account.mint.toBase58()}
 {/if}

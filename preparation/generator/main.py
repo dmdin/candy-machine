@@ -8,7 +8,7 @@ path = pathlib.Path('metaplex_format/')
 path.mkdir(parents=True, exist_ok=True)
 
 
-for i in tqdm(range(10000)):
+for i in tqdm(range(10_000)):
     image = gen_image(15, 1, 1000)
     image.save(path / f'{i}.png', 'PNG')
     _json = gen_json(index=i, name=f'{i} pic', description='Test NFT')

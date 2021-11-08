@@ -1,9 +1,5 @@
 <script lang="ts">
-  import TokenList from '$lib/components/TokenList.svelte';
-  import ConnectButton from '$lib/components/ConnectButton.svelte';
-  import SolBalance from '$lib/components/SolBalance.svelte';
-  import {pubKey} from '$lib/stores/signer';
-
+  import ConnectButton from '$lib/components/index/ConnectButton.svelte';
   let width;
 </script>
 
