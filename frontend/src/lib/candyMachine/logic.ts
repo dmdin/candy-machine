@@ -20,7 +20,7 @@ export interface CandyMachine {
 	program: anchor.Program;
 }
 
-interface CandyMachineState {
+export interface CandyMachineState {
 	candyMachine: CandyMachine;
 	itemsAvailable: number;
 	itemsRedeemed: number;
@@ -42,7 +42,7 @@ export const awaitTransactionSignatureConfirmation = async (
 		err: null,
 	};
 	let subId = 0;
-	status = await new Promise(async (resolve, reject) => {
+	status = await new Promise( async (resolve, reject) => {
 		setTimeout(() => {
 			if (done) {
 				return;
@@ -109,7 +109,7 @@ export const awaitTransactionSignatureConfirmation = async (
 
 	//@ts-ignore
 	if (connection._signatureSubscriptions[subId]) {
-		connection.removeSignatureListener(subId);
+		await connection.removeSignatureListener(subId);
 	}
 	done = true;
 	console.log('Returning status', status);
@@ -215,7 +215,7 @@ const getTokenWallet = async (wallet: anchor.web3.PublicKey, mint: anchor.web3.P
 };
 
 export const mintOneToken = async (
-	candyMachine: Logic,
+	candyMachine: CandyMachine,
 	config: anchor.web3.PublicKey, // feels like this should be part of candyMachine?
 	payer: anchor.web3.PublicKey,
 	treasury: anchor.web3.PublicKey

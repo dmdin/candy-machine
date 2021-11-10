@@ -1,3 +1,4 @@
+import type { CandyMachineState } from './logic';
 import { Writable, writable } from 'svelte/store';
 
 export const balance: Writable<number> = writable(0);
@@ -12,3 +13,5 @@ interface Alert {
 }
 
 export const alertMsg: Writable<Alert> = writable();
+
+export const candyMachineState: Writable<CandyMachineState> = writable();

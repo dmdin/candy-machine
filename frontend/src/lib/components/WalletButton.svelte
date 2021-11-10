@@ -5,8 +5,6 @@
 <script lang='ts'>
 	import {wallet, adapter} from '$lib/wallets/stores';
 	import { shortAddress } from '$lib/utils/formatting';
-	import { onMount } from 'svelte';
-
 
 	// adapter.connected doesn't trigger reactivity
 	let connected = false;
