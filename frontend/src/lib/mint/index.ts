@@ -91,6 +91,7 @@ export async function mint(): Promise<void> {
 				message = `Insufficient funds to mint. Please fund your wallet.`;
 			}
 		} else {
+			console.log('Error!', error.code);
 			if (error.code === 311) {
 				message = `SOLD OUT!`;
 				isSoldOut.set(true);

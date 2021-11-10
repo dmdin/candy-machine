@@ -1,5 +1,5 @@
 <main>
-	<a class="btn btn-accent" href='/mint'>Mint page</a>
+	<a class="btn btn-accent" href="/mint">Mint page</a>
 </main>
 
 <style>

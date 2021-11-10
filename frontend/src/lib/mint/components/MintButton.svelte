@@ -1,8 +1,5 @@
 <script lang="ts">
-	import { mint } from '../index'
+	import { mint } from '../index';
 </script>
 
-
-<button class="btn btn-accent" on:click={mint}>
-	Mint!
-</button>
+<button class="btn btn-accent my-3" on:click={mint}> Mint! </button>

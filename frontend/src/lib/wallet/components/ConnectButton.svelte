@@ -1,9 +1,10 @@
 <script context="module">
+	export const ssr = false;
 </script>
 
 <script lang="ts">
 	import { shortAddress } from '$lib/utils/formatting';
-	import { wallet, adapter, connected} from '../stores';
+	import { wallet, adapter, connected } from '../stores';
 
 	async function Connect() {
 		await $adapter.connect();

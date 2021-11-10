@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import type {Writable} from 'svelte/store';
+import type { Writable } from 'svelte/store';
 import type { Alert, CandyMachineState } from './types';
 
 export const balance: Writable<number> = writable(0);
