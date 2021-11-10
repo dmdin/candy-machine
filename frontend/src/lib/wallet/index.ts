@@ -1,4 +1,8 @@
-import type { MessageSignerWalletAdapter, SignerWalletAdapter, WalletAdapter } from '@solana/wallet-adapter-base';
+import type {
+	MessageSignerWalletAdapter,
+	SignerWalletAdapter,
+	WalletAdapter,
+} from '@solana/wallet-adapter-base';
 import { PhantomWalletAdapter } from './phantom';
 
 export enum WalletName {
@@ -23,11 +27,12 @@ export interface Wallet {
 	adapter: () => WalletAdapter | SignerWalletAdapter | MessageSignerWalletAdapter;
 }
 
-export const ICONS_URL = 'https://raw.githubusercontent.com/solana-labs/wallet-adapter/master/packages/wallets/icons';
+export const ICONS_URL =
+	'https://raw.githubusercontent.com/solana-labs/wallet-adapter/master/packages/wallets/icons';
 
 export const getPhantomWallet = (config?: any): Wallet => ({
 	name: WalletName.Phantom,
 	url: 'https://www.phantom.app',
 	icon: `${ICONS_URL}/phantom.svg`,
-	adapter: () => new PhantomWalletAdapter(config)
+	adapter: () => new PhantomWalletAdapter(config),
 });

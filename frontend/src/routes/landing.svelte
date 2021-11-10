@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ConnectButton from '$lib/components/index/ConnectButton.svelte';
+	import ConnectButton from '$lib/index/components/ConnectButton.svelte';
 	let width;
 
 	const handleWheel = (e) => {

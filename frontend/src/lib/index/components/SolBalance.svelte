@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { pubKey } from '$lib/wallets/stores';
+	import { pubKey } from '$lib/wallet/stores';
 	import { getBalance } from '$lib/provider';
 
 	$: balance = $pubKey && getBalance($pubKey);

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import NFTItem from '$lib/components/index/NFTItem.svelte';
 	import TokenItem from '$lib/components/index/TokenItem.svelte';
-	import { pubKey } from '$lib/wallets/stores';
+	import { pubKey } from '$lib/wallet/stores';
 	import { getTokenAccountsForWallet, getTokenMap, sortByTokenType } from '$lib/tokens';
 
 	$: tokenMap = getTokenMap();

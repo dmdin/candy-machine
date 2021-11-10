@@ -1,11 +1,22 @@
-import { vars } from '$lib/env';
-import { candyMachineState as cmStore, isMinting, alertMsg, isSoldOut, isActive, balance as balanceStore } from './stores';
 import { get } from 'svelte/store';
 import * as anchor from '@project-serum/anchor';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
-import { adapter as walletStore } from '$lib/wallets/stores';
+
+import { adapter as walletStore } from '$lib/wallet/stores';
 import { connection } from '$lib/network';
-import { awaitTransactionSignatureConfirmation, CandyMachineState, getCandyMachineState, mintOneToken } from './logic';
+import { vars } from '$lib/env';
+
+import {
+	candyMachineState as cmStore,
+	isMinting,
+	alertMsg,
+	isSoldOut,
+	isActive,
+	balance as balanceStore,
+} from './stores';
+import { awaitTransactionSignatureConfirmation, getCandyMachineState, mintOneToken } from './logic';
+import type { CandyMachineState } from './types';
+import { AlertType } from './types';
 
 // TODO isActive countdown
 export const txTimeout = 30000; // TODO milliseconds (confirm this works for your project)
@@ -20,7 +31,7 @@ export async function loadMachineState(): Promise<void> {
 	const anchorWallet = {
 		publicKey: wallet.publicKey,
 		signAllTransactions: wallet.signAllTransactions,
-		signTransaction: wallet.signTransaction
+		signTransaction: wallet.signTransaction,
 	} as anchor.Wallet;
 
 	const state: CandyMachineState = await getCandyMachineState(
@@ -47,25 +58,25 @@ export async function mint(): Promise<void> {
 				treasury
 			);
 
-			const status = await awaitTransactionSignatureConfirmation(
+			const status = (await awaitTransactionSignatureConfirmation(
 				mintTxId,
 				txTimeout,
 				connection,
 				'singleGossip',
 				false
-			) as anchor.web3.SignatureStatus;
+			)) as anchor.web3.SignatureStatus;
 
 			if (!status?.err) {
 				alertMsg.set({
 					open: true,
 					message: 'Congratulations! Mint succeeded!',
-					severity: 'success'
+					severity: AlertType.Success,
 				});
 			} else {
 				alertMsg.set({
 					open: true,
 					message: 'Mint failed! Please try again!',
-					severity: 'error'
+					severity: AlertType.Error,
 				});
 			}
 		}
@@ -91,7 +102,7 @@ export async function mint(): Promise<void> {
 		alertMsg.set({
 			open: true,
 			message,
-			severity: 'error'
+			severity: AlertType.Error,
 		});
 	} finally {
 		if (wallet?.publicKey) {
