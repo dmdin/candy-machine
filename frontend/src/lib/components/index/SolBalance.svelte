@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { pubKey } from '$lib/wallet/stores';
+	import { pubKey } from '$lib/wallets/stores';
 	import { getBalance } from '$lib/provider';
 
 	$: balance = $pubKey && getBalance($pubKey);
@@ -19,7 +19,7 @@
 			{:then _balance}
 				{(_balance / 1e9).toLocaleString('en', {
 					minimumFractionDigits: 2,
-					maximumFractionDigits: 2
+					maximumFractionDigits: 2,
 				})}
 			{:catch err}
 				{err.message}

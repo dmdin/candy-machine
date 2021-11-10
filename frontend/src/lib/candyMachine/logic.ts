@@ -15,7 +15,7 @@ const TOKEN_METADATA_PROGRAM_ID = new anchor.web3.PublicKey(
 );
 
 export interface CandyMachine {
-	id: anchor.web3.PublicKey,
+	id: anchor.web3.PublicKey;
 	connection: anchor.web3.Connection;
 	program: anchor.Program;
 }
@@ -25,7 +25,7 @@ interface CandyMachineState {
 	itemsAvailable: number;
 	itemsRedeemed: number;
 	itemsRemaining: number;
-	goLiveDate: Date,
+	goLiveDate: Date;
 }
 
 export const awaitTransactionSignatureConfirmation = async (
@@ -39,7 +39,7 @@ export const awaitTransactionSignatureConfirmation = async (
 	let status: anchor.web3.SignatureStatus | null | void = {
 		slot: 0,
 		confirmations: 0,
-		err: null
+		err: null,
 	};
 	let subId = 0;
 	status = await new Promise(async (resolve, reject) => {
@@ -59,7 +59,7 @@ export const awaitTransactionSignatureConfirmation = async (
 					status = {
 						err: result.err,
 						slot: context.slot,
-						confirmations: 0
+						confirmations: 0,
 					};
 					if (result.err) {
 						console.log('Rejected via websocket', result.err);
@@ -77,11 +77,10 @@ export const awaitTransactionSignatureConfirmation = async (
 		}
 		while (!done && queryStatus) {
 			// eslint-disable-next-line no-loop-func
-			await (async () => {  // TODO check if await is needed
+			await (async () => {
+				// TODO check if await is needed
 				try {
-					const signatureStatuses = await connection.getSignatureStatuses([
-						txid
-					]);
+					const signatureStatuses = await connection.getSignatureStatuses([txid]);
 					status = signatureStatuses && signatureStatuses.value[0];
 					if (!done) {
 						if (!status) {
@@ -132,19 +131,19 @@ const createAssociatedTokenAccountInstruction = (
 		{
 			pubkey: anchor.web3.SystemProgram.programId,
 			isSigner: false,
-			isWritable: false
+			isWritable: false,
 		},
 		{ pubkey: TOKEN_PROGRAM_ID, isSigner: false, isWritable: false },
 		{
 			pubkey: anchor.web3.SYSVAR_RENT_PUBKEY,
 			isSigner: false,
-			isWritable: false
-		}
+			isWritable: false,
+		},
 	];
 	return new anchor.web3.TransactionInstruction({
 		keys,
 		programId: SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID,
-		data: Buffer.from([])
+		data: Buffer.from([]),
 	});
 };
 
@@ -154,19 +153,16 @@ export const getCandyMachineState = async (
 	connection: anchor.web3.Connection
 ): Promise<CandyMachineState> => {
 	const provider = new anchor.Provider(connection, anchorWallet, {
-		preflightCommitment: 'recent'
+		preflightCommitment: 'recent',
 	});
 
-	const idl = await anchor.Program.fetchIdl(
-		CANDY_MACHINE_PROGRAM,
-		provider
-	);
+	const idl = await anchor.Program.fetchIdl(CANDY_MACHINE_PROGRAM, provider);
 
 	const program = new anchor.Program(idl, CANDY_MACHINE_PROGRAM, provider);
 	const candyMachine = {
 		id: candyMachineId,
 		connection,
-		program
+		program,
 	};
 
 	const state: any = await program.account.candyMachine.fetch(candyMachineId);
@@ -182,45 +178,34 @@ export const getCandyMachineState = async (
 		itemsAvailable,
 		itemsRedeemed,
 		itemsRemaining,
-		goLiveDate
+		goLiveDate,
 	};
 };
 
-const getMasterEdition = async (
-	mint: anchor.web3.PublicKey
-): Promise<anchor.web3.PublicKey> => {
+const getMasterEdition = async (mint: anchor.web3.PublicKey): Promise<anchor.web3.PublicKey> => {
 	return (
 		await anchor.web3.PublicKey.findProgramAddress(
 			[
 				Buffer.from('metadata'),
 				TOKEN_METADATA_PROGRAM_ID.toBuffer(),
 				mint.toBuffer(),
-				Buffer.from('edition')
+				Buffer.from('edition'),
 			],
 			TOKEN_METADATA_PROGRAM_ID
 		)
 	)[0];
 };
 
-const getMetadata = async (
-	mint: anchor.web3.PublicKey
-): Promise<anchor.web3.PublicKey> => {
+const getMetadata = async (mint: anchor.web3.PublicKey): Promise<anchor.web3.PublicKey> => {
 	return (
 		await anchor.web3.PublicKey.findProgramAddress(
-			[
-				Buffer.from('metadata'),
-				TOKEN_METADATA_PROGRAM_ID.toBuffer(),
-				mint.toBuffer()
-			],
+			[Buffer.from('metadata'), TOKEN_METADATA_PROGRAM_ID.toBuffer(), mint.toBuffer()],
 			TOKEN_METADATA_PROGRAM_ID
 		)
 	)[0];
 };
 
-const getTokenWallet = async (
-	wallet: anchor.web3.PublicKey,
-	mint: anchor.web3.PublicKey
-) => {
+const getTokenWallet = async (wallet: anchor.web3.PublicKey, mint: anchor.web3.PublicKey) => {
 	return (
 		await anchor.web3.PublicKey.findProgramAddress(
 			[wallet.toBuffer(), TOKEN_PROGRAM_ID.toBuffer(), mint.toBuffer()],
@@ -241,9 +226,7 @@ export const mintOneToken = async (
 	const metadata = await getMetadata(mint.publicKey);
 	const masterEdition = await getMasterEdition(mint.publicKey);
 
-	const rent = await connection.getMinimumBalanceForRentExemption(
-		MintLayout.span
-	);
+	const rent = await connection.getMinimumBalanceForRentExemption(MintLayout.span);
 
 	return await program.rpc.mintNft({
 		accounts: {
@@ -260,7 +243,7 @@ export const mintOneToken = async (
 			tokenProgram: TOKEN_PROGRAM_ID,
 			systemProgram: anchor.web3.SystemProgram.programId,
 			rent: anchor.web3.SYSVAR_RENT_PUBKEY,
-			clock: anchor.web3.SYSVAR_CLOCK_PUBKEY
+			clock: anchor.web3.SYSVAR_CLOCK_PUBKEY,
 		},
 		signers: [mint],
 		instructions: [
@@ -269,30 +252,12 @@ export const mintOneToken = async (
 				newAccountPubkey: mint.publicKey,
 				space: MintLayout.span,
 				lamports: rent,
-				programId: TOKEN_PROGRAM_ID
+				programId: TOKEN_PROGRAM_ID,
 			}),
-			Token.createInitMintInstruction(
-				TOKEN_PROGRAM_ID,
-				mint.publicKey,
-				0,
-				payer,
-				payer
-			),
-			createAssociatedTokenAccountInstruction(
-				token,
-				payer,
-				payer,
-				mint.publicKey
-			),
-			Token.createMintToInstruction(
-				TOKEN_PROGRAM_ID,
-				mint.publicKey,
-				token,
-				payer,
-				[],
-				1
-			)
-		]
+			Token.createInitMintInstruction(TOKEN_PROGRAM_ID, mint.publicKey, 0, payer, payer),
+			createAssociatedTokenAccountInstruction(token, payer, payer, mint.publicKey),
+			Token.createMintToInstruction(TOKEN_PROGRAM_ID, mint.publicKey, token, payer, [], 1),
+		],
 	});
 };
 

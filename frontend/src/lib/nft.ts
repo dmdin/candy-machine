@@ -40,10 +40,10 @@ export async function fetchNFT(mintPubKey: PublicKey): Promise<Array<Metadata>> 
 						offset:
 							1 + // key
 							32, // update auth
-						bytes: mintPubKey.toBase58()
-					}
-				}
-			]
+						bytes: mintPubKey.toBase58(),
+					},
+				},
+			],
 		})
 		.then((accounts) => {
 			return accounts.map((account) => {

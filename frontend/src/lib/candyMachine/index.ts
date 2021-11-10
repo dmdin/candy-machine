@@ -12,19 +12,17 @@ export const candyMachineId = new anchor.web3.PublicKey(vars.CANDY_MACHINE_ID);
 export const startDate = parseInt(vars.CANDY_START_DATE as string, 10);
 
 export async function init() {
-
 	const anchorWallet = {
 		publicKey: wallet.publicKey,
 		signAllTransactions: wallet.signAllTransactions,
-		signTransaction: wallet.signTransaction
+		signTransaction: wallet.signTransaction,
 	} as anchor.Wallet;
 
-	const { candyMachine, goLiveDate, itemsRemaining } =
-		await getCandyMachineState(
-			anchorWallet,
-			props.candyMachineId,
-			props.connection
-		);
+	const { candyMachine, goLiveDate, itemsRemaining } = await getCandyMachineState(
+		anchorWallet,
+		props.candyMachineId,
+		props.connection
+	);
 }
 
 export async function mint(): Promise<void> {
@@ -50,13 +48,13 @@ export async function mint(): Promise<void> {
 				setAlertState({
 					open: true,
 					message: 'Congratulations! Mint succeeded!',
-					severity: 'success'
+					severity: 'success',
 				});
 			} else {
 				setAlertState({
 					open: true,
 					message: 'Mint failed! Please try again!',
-					severity: 'error'
+					severity: 'error',
 				});
 			}
 		}
@@ -82,7 +80,7 @@ export async function mint(): Promise<void> {
 		setAlertState({
 			open: true,
 			message,
-			severity: 'error'
+			severity: 'error',
 		});
 	} finally {
 		if (wallet?.publicKey) {

@@ -8,7 +8,7 @@ Basic project with `SvelteKit` for `Solana`. View your wallet balance and SPL to
 
 It's easy, dingus!
 
-``` bash
+```bash
 git clone --depth=1 https://github.com/monomadic/solana-tokenlist.git
 yarn
 yarn dev

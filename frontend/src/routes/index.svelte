@@ -1,15 +1,14 @@
 <script lang="ts">
 	import TokenList from '$lib/components/index/TokenList.svelte';
-	import ConnectButton from '$lib/components/index/ConnectButton.svelte';
+	// import ConnectButton from '$lib/components/index/ConnectButton.svelte';
 	import SolBalance from '$lib/components/index/SolBalance.svelte';
-	import { pubKey } from '$lib/wallet/stores';
+	import { pubKey } from '$lib/wallets/stores';
 </script>
-
 
 <main>
 	<div class="flex justify-center">
 		<div class="flex justify-center my-4" style="min-width: 440px;">
-			<ConnectButton />
+<!--			<ConnectButton />-->
 		</div>
 	</div>
 

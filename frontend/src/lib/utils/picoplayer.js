@@ -7,41 +7,82 @@ var codo_command = 0;
 var codo_command_p = 0;
 var codo_volume = 256;
 var codo_running = true;
-var pa_pid = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var pa_pid = [
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+];
 
 // Pico-8 buttons to Web Player key codes lookup table
 var pico8keys = [
-    [37, 39, 38, 40, 90, 88],
-    [83, 70, 69, 68, 9, 81]
+	[37, 39, 38, 40, 90, 88],
+	[83, 70, 69, 68, 9, 81],
 ];
 
 // Loads pico8 web player library and setups everything to run
 export function PicoPlayer(element, cart, lib) {
-    // fallback to bbs version of pico8 console
-    if (!lib) {
-        lib = 'https://www.lexaloffle.com/play/pico8_0203_2.js';
-    }
+	// fallback to bbs version of pico8 console
+	if (!lib) {
+		lib = 'https://www.lexaloffle.com/play/pico8_0203_2.js';
+	}
 
-    // load element by ID
-    if (typeof(element) == 'string') {
-        element = document.getElementById(element);
-    }
+	// load element by ID
+	if (typeof element == 'string') {
+		element = document.getElementById(element);
+	}
 
-    // create canvas and add it into element
-    var canvas = document.createElement('canvas');
-    element.appendChild(canvas);
+	// create canvas and add it into element
+	var canvas = document.createElement('canvas');
+	element.appendChild(canvas);
 
-    // setup module to load card and point to our canvas
-    Module = {
-        arguments: [cart],
-        canvas: canvas
-    };
+	// setup module to load card and point to our canvas
+	Module = {
+		arguments: [cart],
+		canvas: canvas,
+	};
 
-    // load pico8 library
-    var head = document.getElementsByTagName('head')[0];
-    var js = document.createElement('script');
-    js.src = lib;
-    head.appendChild(js);
+	// load pico8 library
+	var head = document.getElementsByTagName('head')[0];
+	var js = document.createElement('script');
+	js.src = lib;
+	head.appendChild(js);
 }
 
 // press button

@@ -17,7 +17,7 @@ export type SPLToken = {
 
 export enum SPLTokenType {
 	FungibleToken = 0,
-	NonFungibleToken = 1
+	NonFungibleToken = 1,
 }
 
 export type TokenInfo = {
@@ -40,10 +40,10 @@ async function fetchSPLTokens(connection: Connection, pubKey: PublicKey): Promis
 				memcmp: {
 					// filter memory comparison
 					offset: 32, // owner metadata is 32 bytes offset
-					bytes: pubKey.toBase58()
-				}
-			}
-		]
+					bytes: pubKey.toBase58(),
+				},
+			},
+		],
 	});
 }
 
@@ -55,7 +55,7 @@ async function fetchAccountData(
 		return {
 			mint: mintAddress,
 			decimals: data.parsed.info.decimals,
-			supply: data.parsed.info.supply
+			supply: data.parsed.info.supply,
 		};
 	});
 }
@@ -82,7 +82,7 @@ async function mapTokenType(token: SPLToken): Promise<TokenInfo> {
 			mint: new web3.PublicKey(account.mint),
 			owner: new web3.PublicKey(token.account.owner),
 			amount: data.parsed.info.tokenAmount.uiAmount,
-			type: tokenType(account)
+			type: tokenType(account),
 		};
 	});
 }
@@ -110,7 +110,7 @@ export function sortByTokenType(
 ): { nfts: TokenInfo[]; tokens: TokenInfo[] } {
 	return {
 		nfts: alltokens.filter((token) => token.type != SPLTokenType.FungibleToken),
-		tokens: alltokens.filter((token) => token.type != SPLTokenType.NonFungibleToken)
+		tokens: alltokens.filter((token) => token.type != SPLTokenType.NonFungibleToken),
 	};
 }
 
