@@ -12,6 +12,7 @@ import {
 	alertMsg,
 	isSoldOut,
 	isActive,
+	dropDate,
 	balance as balanceStore,
 } from './stores';
 import { awaitTransactionSignatureConfirmation, getCandyMachineState, mintOneToken } from './logic';
@@ -23,7 +24,8 @@ export const txTimeout = 30000; // TODO milliseconds (confirm this works for you
 export const treasury = new anchor.web3.PublicKey(vars.TREASURY_ADDRESS);
 export const candyMachineConfig = new anchor.web3.PublicKey(vars.CANDY_MACHINE_CONFIG);
 export const candyMachineId = new anchor.web3.PublicKey(vars.CANDY_MACHINE_ID);
-export const startDate = parseInt(vars.CANDY_START_DATE as string, 10);
+export const startDate = new Date(vars.CANDY_START_DATE as string);
+dropDate.set(startDate);
 
 export async function loadMachineState(): Promise<void> {
 	const wallet = get(walletStore);

@@ -8,9 +8,7 @@
 	import ConnectButton from '$lib/wallet/components/ConnectButton.svelte';
 	import MintButton from '$lib/mint/components/MintButton.svelte';
 	import Alert from '$lib/mint/components/Alert.svelte';
-
-	import { vars } from '$lib/env';
-	import { AlertType } from '$lib/mint/types';
+	import Countdown from '$lib/mint/components/Countdown.svelte';
 	import {
 		isMinting,
 		isSoldOut,
@@ -29,7 +27,7 @@
 
 <main class="h-screen grid place-content-center">
 	<div class="flex flex-col items-center">
-		<h3>{vars.SELF_URL}</h3>
+		<Countdown />
 		<ConnectButton />
 		{#if $candyMachineState && $connected}
 			<MintButton />

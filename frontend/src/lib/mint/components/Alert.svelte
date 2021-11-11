@@ -37,9 +37,6 @@
 	</div>
 {/if}
 
-{$candyMachineState.itemsAvailable}
-{$candyMachineState.itemsRemaining}
-{$candyMachineState.itemsRedeemed}
 {#if $isSoldOut || $candyMachineState.itemsRemaining === 0}
 	<div class="alert alert-error">
 		<div class="flex-1">
