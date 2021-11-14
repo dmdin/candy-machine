@@ -6,7 +6,15 @@ import { adapter as walletStore } from '$lib/wallet/stores';
 import { connection } from '$lib/network';
 import { vars } from '$lib/env';
 
-import { alertMsg, balance as balanceStore, candyMachineState as cmStore, dropDate, isMinting} from './stores';
+import {
+	alertMsg,
+	balance as balanceStore,
+	candyMachineState as cmStore,
+	dropDate,
+	isMinting,
+	isSoldOut,
+} from './stores';
+
 import { awaitTransactionSignatureConfirmation, getCandyMachineState, mintOneToken } from './logic';
 import type { CandyMachineState } from './types';
 import { AlertType } from './types';
@@ -21,41 +29,48 @@ dropDate.set(startDate);
 
 export async function loadMachineState(): Promise<void> {
 	const wallet = get(walletStore);
-	console.log('make anchor wallet', wallet.connected)
-	const anchorWallet = {
-		publicKey: wallet.publicKey,
-		signAllTransactions: wallet.signAllTransactions,
-		signTransaction: wallet.signTransaction
-	} as anchor.Wallet;
+
+	// FIXME AnchorWallet destroys context use wallet with context instead!!!
+	// const anchorWallet = {
+	// 	publicKey: wallet.publicKey,
+	// 	signAllTransactions: wallet.signAllTransactions,
+	// 	signTransaction: wallet.signTransaction
+	// } as anchor.Wallet
 
 	const state: CandyMachineState = await getCandyMachineState(
-	// @ts-ignore
-		wallet, // FIXME AnchorWallet destroys context!!!
+		// @ts-ignore
+		wallet,
 		candyMachineId,
 		connection
 	);
-
 	cmStore.set(state);
 }
 
-export async function mint(): Promise<void> {
+// if success returns true
+export async function mint(): Promise<boolean> {
 	const wallet = get(walletStore);
 	const cmState = get(cmStore);
 	const candyMachine = cmState.candyMachine;
+	let success = true;
+
+	function showError(msg) {
+		alertMsg.set({
+			open: true,
+			message: msg,
+			severity: AlertType.Error,
+		});
+		success = false;
+	}
 
 	try {
 		isMinting.set(true);
-		console.log(wallet.connected, wallet.publicKey.toString());
 		if (wallet.connected && candyMachine?.program && wallet.publicKey) {
-			console.log('Start minting one token');
 			const mintTxId = await mintOneToken(
 				candyMachine,
 				candyMachineConfig,
 				wallet.publicKey,
 				treasury
 			);
-			console.log('Finished minting one token');
-			console.log('Start transaction confirmation');
 			const status = (await awaitTransactionSignatureConfirmation(
 				mintTxId,
 				txTimeout,
@@ -63,54 +78,44 @@ export async function mint(): Promise<void> {
 				'singleGossip',
 				false
 			)) as anchor.web3.SignatureStatus;
-			console.log('Finished transaction confirmation');
 
 			if (!status?.err) {
 				alertMsg.set({
 					open: true,
 					message: 'Congratulations! Mint succeeded!',
-					severity: AlertType.Success
+					severity: AlertType.Success,
 				});
 			} else {
-				alertMsg.set({
-					open: true,
-					message: 'Mint failed! Please try again!',
-					severity: AlertType.Error
-				});
+				showError('Mint failed! Please try again!');
 			}
 		}
 	} catch (error: any) {
-		// TODO: blech:
-		let message = error.msg || 'Minting failed! Please try again!';
+		showError(error.msg || 'Minting failed! Please try again!');
+
 		if (!error.msg) {
 			// if (error.message.indexOf('0x138')) {
 			//} else
 			if (error.message.indexOf('0x137')) {
-				message = `SOLD OUT!`;
+				console.log('User rejected transaction');
+				// isSoldOut.set(true);
 			} else if (error.message.indexOf('0x135')) {
-				message = `Insufficient funds to mint. Please fund your wallet.`;
+				showError(`Insufficient funds to mint. Please fund your wallet.`);
 			}
 		} else {
-			console.log('Error!', error.code);
 			if (error.code === 311) {
-				console.log('Error 311!')
-				// message = `SOLD OUT!`;
-				// isSoldOut.set(true);
+				isSoldOut.set(true);
+				console.log('Error code 311');
 			} else if (error.code === 312) {
-				message = `Minting period hasn't started yet.`;
+				showError(`Minting period hasn't started yet.`);
 			}
 		}
-
-		alertMsg.set({
-			open: true,
-			message,
-			severity: AlertType.Error
-		});
 	} finally {
 		if (wallet?.publicKey) {
 			const balance = await connection.getBalance(wallet?.publicKey);
 			balanceStore.set(balance / LAMPORTS_PER_SOL);
+			await loadMachineState();
 		}
 		isMinting.set(false);
 	}
+	return success;
 }

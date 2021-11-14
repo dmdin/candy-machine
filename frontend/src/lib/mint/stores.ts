@@ -6,11 +6,12 @@ export const balance: Writable<number> = writable(0);
 export const isActive: Writable<boolean> = writable(false); // true when countdown completes
 export const isMinting: Writable<boolean> = writable(false); // true when user got to press MINT
 export const alertMsg: Writable<Alert> = writable();
+export const isSoldOut: Writable<boolean> = writable(false);
+
 export const candyMachineState: Writable<CandyMachineState> = writable();
-export const isSoldOut: Readable<boolean> = derived(
-	candyMachineState,
-	($candyMachineState) => $candyMachineState?.itemsRemaining === 0
-); // true when items remaining is zero
+candyMachineState.subscribe((state) => {
+	if (state?.itemsRemaining === 0) isSoldOut.set(true);
+});
 
 export const dropDate: Writable<Date> = writable();
 export const dateNow: Readable<Date> = readable(new Date(), (set) => {

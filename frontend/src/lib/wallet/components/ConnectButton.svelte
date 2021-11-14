@@ -5,9 +5,14 @@
 <script lang="ts">
 	import { shortAddress } from '$lib/utils/formatting';
 	import { wallet, adapter, connected } from '../stores';
+	import { onMount } from 'svelte';
+
+	export let autoConnect = false;
+	onMount(async () => {
+		if (autoConnect) await Connect();
+	});
 
 	async function Connect() {
-
 		await $adapter.connect();
 		$connected = $adapter.connected;
 	}

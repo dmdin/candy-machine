@@ -145,7 +145,6 @@ export class PhantomWalletAdapter extends BaseMessageSignerWalletAdapter {
 
 			this._wallet = wallet;
 			this._publicKey = publicKey;
-			console.log('Successfully connected:', this._wallet)
 			this.emit('connect');
 		} catch (error: any) {
 			this.emit('error', error);
@@ -176,15 +175,10 @@ export class PhantomWalletAdapter extends BaseMessageSignerWalletAdapter {
 	async signTransaction(transaction: Transaction): Promise<Transaction> {
 		try {
 			const wallet = this._wallet;
-			console.log('Call signTransaction for transaction:', transaction)
-			console.log('Where wallet is:', wallet)
-
 			if (!wallet) throw new WalletNotConnectedError();
-
 			try {
 				return await wallet.signTransaction(transaction);
 			} catch (error: any) {
-				console.log('Transaction sign error!', error)
 				throw new WalletSignTransactionError(error?.message, error);
 			}
 		} catch (error: any) {

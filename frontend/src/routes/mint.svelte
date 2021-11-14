@@ -14,8 +14,6 @@
 	import { loadMachineState } from '$lib/mint';
 
 	$: if ($connected) loadMachineState();
-
-	// $: console.log($isMinting, $isSoldOut, $isActive, $alertMsg, $balance);
 </script>
 
 <main class="h-screen grid place-content-center">
@@ -43,13 +41,13 @@
 				</div>
 			</div>
 		{/if}
-		<ConnectButton />
+		<ConnectButton autoConnect={true} />
 		{#if $candyMachineState && $connected && $isActive}
-			<span class="badge p-4 m-2"
-				>Left: {$candyMachineState.itemsRemaining} / {$candyMachineState.itemsAvailable}</span
-			>
-			<Alert />
+			<span class="badge p-4 mt-3">
+				Left: {$candyMachineState.itemsRemaining} / {$candyMachineState.itemsAvailable}
+			</span>
 			<MintButton />
+			<Alert />
 		{/if}
 	</div>
 </main>
