@@ -214,6 +214,7 @@ export const mintOneToken = async (
 
 	const rent = await connection.getMinimumBalanceForRentExemption(MintLayout.span);
 
+	console.log('Call rpc mintNFT')
 	return await program.rpc.mintNft({
 		accounts: {
 			config,

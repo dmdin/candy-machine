@@ -37,8 +37,8 @@
 	</div>
 {/if}
 
-{#if $isSoldOut || $candyMachineState.itemsRemaining === 0}
-	<div class="alert alert-error">
+{#if $isSoldOut}
+	<div class="alert alert-error mt-3">
 		<div class="flex-1">
 			<path
 				stroke-linecap="round"

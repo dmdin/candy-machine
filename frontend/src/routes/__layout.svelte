@@ -1,5 +1,5 @@
 <script>
-	import '../app.postcss';
+	import '../app.css';
 	import { Buffer } from 'buffer';
 
 	global.Buffer = Buffer;
