@@ -7,6 +7,7 @@
 	import { wallet, adapter, connected } from '../stores';
 
 	async function Connect() {
+
 		await $adapter.connect();
 		$connected = $adapter.connected;
 	}

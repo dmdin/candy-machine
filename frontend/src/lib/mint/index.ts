@@ -6,15 +6,7 @@ import { adapter as walletStore } from '$lib/wallet/stores';
 import { connection } from '$lib/network';
 import { vars } from '$lib/env';
 
-import {
-	candyMachineState as cmStore,
-	isMinting,
-	alertMsg,
-	isSoldOut,
-	isActive,
-	dropDate,
-	balance as balanceStore,
-} from './stores';
+import { alertMsg, balance as balanceStore, candyMachineState as cmStore, dropDate, isMinting} from './stores';
 import { awaitTransactionSignatureConfirmation, getCandyMachineState, mintOneToken } from './logic';
 import type { CandyMachineState } from './types';
 import { AlertType } from './types';
@@ -29,15 +21,16 @@ dropDate.set(startDate);
 
 export async function loadMachineState(): Promise<void> {
 	const wallet = get(walletStore);
-
+	console.log('make anchor wallet', wallet.connected)
 	const anchorWallet = {
 		publicKey: wallet.publicKey,
 		signAllTransactions: wallet.signAllTransactions,
-		signTransaction: wallet.signTransaction,
+		signTransaction: wallet.signTransaction
 	} as anchor.Wallet;
 
 	const state: CandyMachineState = await getCandyMachineState(
-		anchorWallet,
+	// @ts-ignore
+		wallet, // FIXME AnchorWallet destroys context!!!
 		candyMachineId,
 		connection
 	);
@@ -55,9 +48,6 @@ export async function mint(): Promise<void> {
 		console.log(wallet.connected, wallet.publicKey.toString());
 		if (wallet.connected && candyMachine?.program && wallet.publicKey) {
 			console.log('Start minting one token');
-			console.log(candyMachineConfig);
-			console.log(candyMachine);
-			console.log(treasury);
 			const mintTxId = await mintOneToken(
 				candyMachine,
 				candyMachineConfig,
@@ -79,13 +69,13 @@ export async function mint(): Promise<void> {
 				alertMsg.set({
 					open: true,
 					message: 'Congratulations! Mint succeeded!',
-					severity: AlertType.Success,
+					severity: AlertType.Success
 				});
 			} else {
 				alertMsg.set({
 					open: true,
 					message: 'Mint failed! Please try again!',
-					severity: AlertType.Error,
+					severity: AlertType.Error
 				});
 			}
 		}
@@ -93,8 +83,9 @@ export async function mint(): Promise<void> {
 		// TODO: blech:
 		let message = error.msg || 'Minting failed! Please try again!';
 		if (!error.msg) {
-			if (error.message.indexOf('0x138')) {
-			} else if (error.message.indexOf('0x137')) {
+			// if (error.message.indexOf('0x138')) {
+			//} else
+			if (error.message.indexOf('0x137')) {
 				message = `SOLD OUT!`;
 			} else if (error.message.indexOf('0x135')) {
 				message = `Insufficient funds to mint. Please fund your wallet.`;
@@ -102,8 +93,9 @@ export async function mint(): Promise<void> {
 		} else {
 			console.log('Error!', error.code);
 			if (error.code === 311) {
-				message = `SOLD OUT!`;
-				isSoldOut.set(true);
+				console.log('Error 311!')
+				// message = `SOLD OUT!`;
+				// isSoldOut.set(true);
 			} else if (error.code === 312) {
 				message = `Minting period hasn't started yet.`;
 			}
@@ -112,7 +104,7 @@ export async function mint(): Promise<void> {
 		alertMsg.set({
 			open: true,
 			message,
-			severity: AlertType.Error,
+			severity: AlertType.Error
 		});
 	} finally {
 		if (wallet?.publicKey) {

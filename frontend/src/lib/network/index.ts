@@ -10,5 +10,3 @@ export const rpcHost: string = vars.SOLANA_RPC_HOST;
 
 export const connection = new anchor.web3.Connection(rpcHost);
 export const endpoint = clusterApiUrl(network);
-
-console.log(connection);
