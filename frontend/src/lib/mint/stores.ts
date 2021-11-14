@@ -9,7 +9,7 @@ export const alertMsg: Writable<Alert> = writable();
 export const candyMachineState: Writable<CandyMachineState> = writable();
 export const isSoldOut: Readable<boolean> = derived(
 	candyMachineState,
-	$candyMachineState => $candyMachineState?.itemsRemaining === 0
+	($candyMachineState) => $candyMachineState?.itemsRemaining === 0
 ); // true when items remaining is zero
 
 export const dropDate: Writable<Date> = writable();

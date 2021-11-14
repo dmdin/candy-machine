@@ -52,20 +52,20 @@ export async function mint(): Promise<void> {
 
 	try {
 		isMinting.set(true);
-		console.log(wallet.connected, wallet.publicKey.toString())
+		console.log(wallet.connected, wallet.publicKey.toString());
 		if (wallet.connected && candyMachine?.program && wallet.publicKey) {
-			console.log('Start minting one token')
-			console.log(candyMachineConfig)
-			console.log(candyMachine)
-			console.log(treasury)
+			console.log('Start minting one token');
+			console.log(candyMachineConfig);
+			console.log(candyMachine);
+			console.log(treasury);
 			const mintTxId = await mintOneToken(
 				candyMachine,
 				candyMachineConfig,
 				wallet.publicKey,
 				treasury
 			);
-			console.log('Finished minting one token')
-			console.log('Start transaction confirmation')
+			console.log('Finished minting one token');
+			console.log('Start transaction confirmation');
 			const status = (await awaitTransactionSignatureConfirmation(
 				mintTxId,
 				txTimeout,
@@ -73,7 +73,7 @@ export async function mint(): Promise<void> {
 				'singleGossip',
 				false
 			)) as anchor.web3.SignatureStatus;
-			console.log('Finished transaction confirmation')
+			console.log('Finished transaction confirmation');
 
 			if (!status?.err) {
 				alertMsg.set({
