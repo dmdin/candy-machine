@@ -1,6 +1,6 @@
 <script context="module">
 	// export const ssr = false;
-	// export const prerender = true;
+	// export const prerender = false;
 	// export const hydrate = false;
 </script>
 
