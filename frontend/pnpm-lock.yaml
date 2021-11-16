@@ -3,6 +3,9 @@ lockfileVersion: 5.3
 specifiers:
   '@metaplex/js': ^0.0.1
   '@project-serum/anchor': ^0.14.0
+  '@sentry/browser': ^6.15.0
+  '@sentry/integrations': ^6.15.0
+  '@sentry/tracing': ^6.15.0
   '@solana/spl-token': ^0.1.8
   '@solana/spl-token-registry': ^0.2.287
   '@solana/wallet-adapter-base': ^0.5.2
@@ -39,6 +42,9 @@ specifiers:
 devDependencies:
   '@metaplex/js': 0.0.1
   '@project-serum/anchor': 0.14.0
+  '@sentry/browser': 6.15.0
+  '@sentry/integrations': 6.15.0
+  '@sentry/tracing': 6.15.0
   '@solana/spl-token': 0.1.8
   '@solana/spl-token-registry': 0.2.287
   '@solana/wallet-adapter-base': 0.5.2_@solana+web3.js@1.30.2
@@ -225,6 +231,79 @@ packages:
     dependencies:
       estree-walker: 2.0.2
       picomatch: 2.3.0
+    dev: true
+
+  /@sentry/browser/6.15.0:
+    resolution: {integrity: sha512-ZiqfHK5DMVgDsgMTuSwxilWIqEnZzy4yuJ9Sr6Iap1yZddPSiKHYjbBieSHn57UsWHViRB3ojbwu44LfvXKJdQ==}
+    engines: {node: '>=6'}
+    dependencies:
+      '@sentry/core': 6.15.0
+      '@sentry/types': 6.15.0
+      '@sentry/utils': 6.15.0
+      tslib: 1.14.1
+    dev: true
+
+  /@sentry/core/6.15.0:
+    resolution: {integrity: sha512-mCbKyqvD1G3Re6gv6N8tRkBz84gvVWDfLtC6d1WBArIopzter6ktEbvq0cMT6EOvGI2OLXuJ6mtHA93/Q0gGpw==}
+    engines: {node: '>=6'}
+    dependencies:
+      '@sentry/hub': 6.15.0
+      '@sentry/minimal': 6.15.0
+      '@sentry/types': 6.15.0
+      '@sentry/utils': 6.15.0
+      tslib: 1.14.1
+    dev: true
+
+  /@sentry/hub/6.15.0:
+    resolution: {integrity: sha512-cUbHPeG6kKpGBaEMgbTWeU03Y1Up5T3urGF+cgtrn80PmPYYSUPvVvWlZQWPb8CJZ1yQ0gySWo5RUTatBFrEHA==}
+    engines: {node: '>=6'}
+    dependencies:
+      '@sentry/types': 6.15.0
+      '@sentry/utils': 6.15.0
+      tslib: 1.14.1
+    dev: true
+
+  /@sentry/integrations/6.15.0:
+    resolution: {integrity: sha512-fSBAipas6zwyYo4U91pyQOnaTcRCfwvH6ZFwu0Fqmkm64nU9rYpbTNiKkwOWbbiXXT6+LEF6RzBpsyhm4QvgmQ==}
+    engines: {node: '>=6'}
+    dependencies:
+      '@sentry/types': 6.15.0
+      '@sentry/utils': 6.15.0
+      localforage: 1.10.0
+      tslib: 1.14.1
+    dev: true
+
+  /@sentry/minimal/6.15.0:
+    resolution: {integrity: sha512-7RJIvZsjBa1qFUfMrAzQsWdfZT6Gm4t6ZTYfkpsXPBA35hkzglKbBrhhsUvkxGIhUGw/PiCUqxBUjcmzQP0vfg==}
+    engines: {node: '>=6'}
+    dependencies:
+      '@sentry/hub': 6.15.0
+      '@sentry/types': 6.15.0
+      tslib: 1.14.1
+    dev: true
+
+  /@sentry/tracing/6.15.0:
+    resolution: {integrity: sha512-V5unvX8qNEfdawX+m2n0jKgmH/YR2ItWZLH+3UevBTptO+xyfvRtpgGXYWUCo3iGvFgWb1C+iIC7LViR9rTvBg==}
+    engines: {node: '>=6'}
+    dependencies:
+      '@sentry/hub': 6.15.0
+      '@sentry/minimal': 6.15.0
+      '@sentry/types': 6.15.0
+      '@sentry/utils': 6.15.0
+      tslib: 1.14.1
+    dev: true
+
+  /@sentry/types/6.15.0:
+    resolution: {integrity: sha512-zBw5gPUsofXUSpS3ZAXqRNedLRBvirl3sqkj2Lez7X2EkKRgn5D8m9fQIrig/X3TsKcXUpijDW5Buk5zeCVzJA==}
+    engines: {node: '>=6'}
+    dev: true
+
+  /@sentry/utils/6.15.0:
+    resolution: {integrity: sha512-gnhKKyFtnNmKWjDizo7VKD0/Vx8cgW1lCusM6WI7jy2jlO3bQA0+Dzgmr4mIReZ74mq4VpOd2Vfrx7ZldW1DMw==}
+    engines: {node: '>=6'}
+    dependencies:
+      '@sentry/types': 6.15.0
+      tslib: 1.14.1
     dev: true
 
   /@solana/buffer-layout/3.0.0:
@@ -1745,6 +1824,10 @@ packages:
     engines: {node: '>= 4'}
     dev: true
 
+  /immediate/3.0.6:
+    resolution: {integrity: sha1-nbHb0Pr43m++D13V5Wu2BigN5ps=}
+    dev: true
+
   /import-cwd/3.0.0:
     resolution: {integrity: sha512-4pnzH16plW+hgvRECbDWpQl3cqtvSofHWh44met7ESfZ8UZOWWddm8hEyDTqREJ9RbYHY8gi8DqmaelApoOGMg==}
     engines: {node: '>=8'}
@@ -1949,6 +2032,12 @@ packages:
       type-check: 0.4.0
     dev: true
 
+  /lie/3.1.1:
+    resolution: {integrity: sha1-mkNrLMd0bKWd56QfpGmz77dr2H4=}
+    dependencies:
+      immediate: 3.0.6
+    dev: true
+
   /lilconfig/2.0.4:
     resolution: {integrity: sha512-bfTIN7lEsiooCocSISTWXkiWJkRqtL9wYtYy+8EK3Y41qh3mpwPU0ycTOgjdY9ErwXCc8QyrQp82bdL0Xkm9yA==}
     engines: {node: '>=10'}
@@ -1956,6 +2045,12 @@ packages:
 
   /lines-and-columns/1.1.6:
     resolution: {integrity: sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=}
+    dev: true
+
+  /localforage/1.10.0:
+    resolution: {integrity: sha512-14/H1aX7hzBBmmh7sGPd+AOMkkIrHM3Z1PAyGgZigA1H1p5O5ANnMyWzvpAETtG68/dC4pC0ncy3+PPGzXZHPg==}
+    dependencies:
+      lie: 3.1.1
     dev: true
 
   /lodash.memoize/4.1.2:
