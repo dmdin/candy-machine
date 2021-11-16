@@ -9,7 +9,7 @@
 	import MintButton from '$lib/mint/components/MintButton.svelte';
 	import Alert from '$lib/mint/components/Alert.svelte';
 	import Countdown from '$lib/mint/components/Countdown.svelte';
-	import { isMinting, isSoldOut, isActive, balance, candyMachineState } from '$lib/mint/stores';
+	import { isActive, candyMachineState } from '$lib/mint/stores';
 	import { connected } from '$lib/wallet/stores';
 	import { loadMachineState } from '$lib/mint';
 

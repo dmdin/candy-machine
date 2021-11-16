@@ -15,7 +15,6 @@
 		AmbientLight,
 		Vector3,
 		MathUtils,
-		GLTFLoader,
 		LoadedGLTF,
 	} from 'svelthree';
 
@@ -39,7 +38,7 @@
 	 */
 
 	function handleOnClick(e) {
-		console.log("Hi, I was triggered from app's scope!");
+		console.log(e, "Hi, I was triggered from app's scope!");
 	}
 
 	const triggerOnClickAni = (e) => {

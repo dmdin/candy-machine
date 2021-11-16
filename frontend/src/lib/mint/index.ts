@@ -89,7 +89,7 @@ export async function mint(): Promise<boolean> {
 				showError('Mint failed! Please try again!');
 			}
 		}
-	} catch (error: any) {
+	} catch (error) {
 		showError(error.msg || 'Minting failed! Please try again!');
 
 		if (!error.msg) {

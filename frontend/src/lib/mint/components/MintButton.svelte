@@ -7,7 +7,6 @@
 
 	async function handleClick() {
 		const success = await mint();
-		// const success = true
 		if (success) {
 			mintFire();
 			audio.play();

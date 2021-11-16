@@ -1,4 +1,4 @@
-import type { u64 } from '@solana/spl-token';
+// import type { u64 } from '@solana/spl-token';
 
 export function fromLamports(amount: number, decimals: number): number {
 	return amount / 10 ** decimals;

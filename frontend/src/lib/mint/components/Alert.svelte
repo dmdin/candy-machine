@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { alertMsg, candyMachineState, isSoldOut } from '../stores';
+	import { alertMsg, isSoldOut } from '../stores';
 	import { AlertType } from '../types';
 </script>
 
