@@ -7,6 +7,7 @@
 	import { Integrations } from '@sentry/tracing';
 	import { CaptureConsole } from '@sentry/integrations';
 
+	// TODO ignore errors from transaction rejection
 	Sentry.init({
 		dsn: 'https://41e150efdd374340a94fb862f21a2772@o1070274.ingest.sentry.io/6066010',
 		integrations: [
