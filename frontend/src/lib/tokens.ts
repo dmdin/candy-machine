@@ -90,7 +90,7 @@ async function mapTokenType(token: SPLToken): Promise<TokenInfo> {
 // async function reduceTokenType(token: SPLToken, accum: {}): {} {
 //     return {};
 // }
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type TokenMap = Map<any, any>;
 
 export async function getTokenMap(): Promise<TokenMap> {

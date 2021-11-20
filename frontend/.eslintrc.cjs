@@ -3,7 +3,14 @@ module.exports = {
 	parser: '@typescript-eslint/parser',
 	extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'prettier'],
 	plugins: ['svelte3', '@typescript-eslint'],
-	ignorePatterns: ['*.cjs'],
+	// TODO refactor ignored modules
+	ignorePatterns: [
+		'*.cjs',
+		'src/lib/metaplex/*',
+		'src/lib/metaplex/index',
+		'picoplayer.js',
+		'phantom',
+	],
 	overrides: [{ files: ['*.svelte'], processor: 'svelte3/svelte3' }],
 	settings: {
 		'svelte3/typescript': () => require('typescript'),

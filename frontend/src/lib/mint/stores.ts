@@ -4,10 +4,14 @@ import type { Alert, CandyMachineState } from './types';
 
 export const balance: Writable<number> = writable(0);
 export const isActive: Writable<boolean> = writable(false); // true when countdown completes
-export const isSoldOut: Writable<boolean> = writable(false); // true when items remaining is zero
 export const isMinting: Writable<boolean> = writable(false); // true when user got to press MINT
 export const alertMsg: Writable<Alert> = writable();
+export const isSoldOut: Writable<boolean> = writable(false);
+
 export const candyMachineState: Writable<CandyMachineState> = writable();
+candyMachineState.subscribe((state) => {
+	if (state?.itemsRemaining === 0) isSoldOut.set(true);
+});
 
 export const dropDate: Writable<Date> = writable();
 export const dateNow: Readable<Date> = readable(new Date(), (set) => {
@@ -25,11 +29,15 @@ export interface Time {
 export const countDown: Readable<Time> = derived(
 	[dropDate, dateNow],
 	([$dropDate, $dateNow]): Time => {
-		let timeRange = 1000 * 60 * 60 * 24;
-		let minusTime = 0;
-
 		// @ts-ignore
 		const diff = $dropDate - $dateNow;
+		if (diff < 0) {
+			isActive.set(true);
+			return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+		}
+
+		let timeRange = 1000 * 60 * 60 * 24;
+		let minusTime = 0;
 
 		const days = Math.floor(diff / timeRange - minusTime);
 		timeRange /= 24;

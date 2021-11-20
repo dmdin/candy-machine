@@ -30,6 +30,7 @@ export interface Wallet {
 export const ICONS_URL =
 	'https://raw.githubusercontent.com/solana-labs/wallet-adapter/master/packages/wallets/icons';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
 export const getPhantomWallet = (config?: any): Wallet => ({
 	name: WalletName.Phantom,
 	url: 'https://www.phantom.app',

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { alertMsg, candyMachineState, isSoldOut } from '../stores';
+	import { alertMsg, isSoldOut } from '../stores';
 	import { AlertType } from '../types';
 </script>
 
@@ -37,8 +37,8 @@
 	</div>
 {/if}
 
-{#if $isSoldOut || $candyMachineState.itemsRemaining === 0}
-	<div class="alert alert-error">
+{#if $isSoldOut}
+	<div class="alert alert-error mt-3">
 		<div class="flex-1">
 			<path
 				stroke-linecap="round"

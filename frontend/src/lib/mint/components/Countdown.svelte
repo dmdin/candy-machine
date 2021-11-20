@@ -1,5 +1,24 @@
 <script lang="ts">
-	import { countDown } from '../stores';
+	import { countDown, dropDate } from '../stores';
+	import { openFire } from '../confetti';
+	import { onMount } from 'svelte';
+
+	let usedFireworks = false;
+	// @ts-ignore
+	if (Date.now() - $dropDate > 5000) {
+		usedFireworks = true;
+	}
+
+	// fixes confetti problem on the server
+	onMount(() => {
+		countDown.subscribe((v) => {
+			const { days, hours, minutes, seconds } = v;
+			if (!usedFireworks && days === 0 && hours === 0 && minutes === 0 && seconds === 0) {
+				openFire();
+				usedFireworks = true;
+			}
+		});
+	});
 </script>
 
 <div class="grid grid-flow-col gap-5 text-center auto-cols-max my-5">
