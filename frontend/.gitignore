@@ -6,3 +6,4 @@ node_modules
 /.vercel_build_output
 *.log
 static/models
+.vercel
