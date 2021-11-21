@@ -42,10 +42,12 @@
 		"prettier-plugin-svelte": "^2.4.0",
 		"svelte": "^3.44.1",
 		"svelte-check": "^2.2.8",
+		"svelte-cubed": "^0.2.0",
 		"svelte-loading-spinners": "^0.1.7",
 		"svelte-preprocess": "^4.9.8",
 		"svelthree": "^0.119.0-5",
 		"tailwindcss": "^2.2.19",
+		"three": "^0.134.0",
 		"tslib": "^2.3.1",
 		"typescript": "^4.4.4"
 	},

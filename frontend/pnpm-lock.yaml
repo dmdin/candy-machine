@@ -32,10 +32,12 @@ specifiers:
   prettier-plugin-svelte: ^2.4.0
   svelte: ^3.44.1
   svelte-check: ^2.2.8
+  svelte-cubed: ^0.2.0
   svelte-loading-spinners: ^0.1.7
   svelte-preprocess: ^4.9.8
   svelthree: ^0.119.0-5
   tailwindcss: ^2.2.19
+  three: ^0.134.0
   tslib: ^2.3.1
   typescript: ^4.4.4
 
@@ -71,10 +73,12 @@ devDependencies:
   prettier-plugin-svelte: 2.4.0_prettier@2.2.1+svelte@3.44.1
   svelte: 3.44.1
   svelte-check: 2.2.8_12c78e77d52b6508fc8705d47f1a4eb4
+  svelte-cubed: 0.2.0
   svelte-loading-spinners: 0.1.7
   svelte-preprocess: 4.9.8_1efe055846dc052112d100fb64c56a4d
   svelthree: 0.119.0-5
   tailwindcss: 2.2.19_0c54bdadaf9d9c9c6c134cb2c6c061a3
+  three: 0.134.0
   tslib: 2.3.1
   typescript: 4.4.4
 
@@ -491,6 +495,15 @@ packages:
       - supports-color
     dev: true
 
+  /@sveltejs/site-kit/2.0.0-next.6:
+    resolution:
+      {
+        integrity: sha512-hZ/uQmAT9R6cge/Wux+pMdKHKj5ICeBd6NNS2dUx5bugpQI8wocLnvEKKH+Z7f0o6Nmvn8D/BExTrLCBDGRySw==,
+      }
+    dependencies:
+      golden-fleece: 1.0.9
+    dev: true
+
   /@sveltejs/vite-plugin-svelte/1.0.0-next.30_svelte@3.44.1+vite@2.6.13:
     resolution:
       {
@@ -552,6 +565,15 @@ packages:
       '@types/node': 12.20.36
       '@types/qs': 6.9.7
       '@types/range-parser': 1.2.4
+    dev: true
+
+  /@types/hast/2.3.4:
+    resolution:
+      {
+        integrity: sha512-wLEm0QvaoawEDoTRwzTXp4b4jpwiJDvR5KMnFnVodm3scufTlBOWRD6N1OBf9TZMhjlNsSfcO5V+7AF4+Vy+9g==,
+      }
+    dependencies:
+      '@types/unist': 2.0.6
     dev: true
 
   /@types/json-schema/7.0.9:
@@ -617,6 +639,13 @@ packages:
       }
     dependencies:
       '@types/node': 16.11.6
+    dev: true
+
+  /@types/unist/2.0.6:
+    resolution:
+      {
+        integrity: sha512-PBjIUxZHOuj0R15/xuwJYjFi+KZdNFrehocChv4g5hu6aFroHue8m0lBP0POdK2nKzbw0cgV1mws8+V/JAcEkQ==,
+      }
     dev: true
 
   /@types/ws/7.4.7:
@@ -2358,6 +2387,13 @@ packages:
       slash: 3.0.0
     dev: true
 
+  /golden-fleece/1.0.9:
+    resolution:
+      {
+        integrity: sha512-YSwLaGMOgSBx9roJlNLL12c+FRiw7VECphinc6mGucphc/ZxTHgdEz6gmJqH6NOzYEd/yr64hwjom5pZ+tJVpg==,
+      }
+    dev: true
+
   /graceful-fs/4.2.8:
     resolution:
       {
@@ -2403,6 +2439,24 @@ packages:
     dependencies:
       inherits: 2.0.4
       minimalistic-assert: 1.0.1
+    dev: true
+
+  /hast-util-heading-rank/2.1.0:
+    resolution:
+      {
+        integrity: sha512-w+Rw20Q/iWp2Bcnr6uTrYU6/ftZLbHKhvc8nM26VIWpDqDMlku2iXUVTeOlsdoih/UKQhY7PHQ+vZ0Aqq8bxtQ==,
+      }
+    dependencies:
+      '@types/hast': 2.3.4
+    dev: true
+
+  /hast-util-to-string/2.0.0:
+    resolution:
+      {
+        integrity: sha512-02AQ3vLhuH3FisaMM+i/9sm4OXGSq1UhOOCpTLLQtHdL3tZt7qil69r8M8iDkZYyC0HCFylcYoP+8IO7ddta1A==,
+      }
+    dependencies:
+      '@types/hast': 2.3.4
     dev: true
 
   /hex-color-regex/1.1.0:
@@ -4057,6 +4111,18 @@ packages:
       - sugarss
     dev: true
 
+  /svelte-cubed/0.2.0:
+    resolution:
+      {
+        integrity: sha512-9pbRZi8eJERS5obyQHbb7JASqt+C2R9LcOHQpG6dJw2ZOGULI69E33JaUXkOE4pqe2aFskF3ltwaj2khBnDJMw==,
+      }
+    dependencies:
+      '@sveltejs/site-kit': 2.0.0-next.6
+      hast-util-heading-rank: 2.1.0
+      hast-util-to-string: 2.0.0
+      unist-util-visit: 4.1.0
+    dev: true
+
   /svelte-hmr/0.14.7_svelte@3.44.1:
     resolution:
       {
@@ -4239,6 +4305,13 @@ packages:
     resolution: { integrity: sha1-f17oI66AUgfACvLfSoTsP8+lcLQ= }
     dev: true
 
+  /three/0.134.0:
+    resolution:
+      {
+        integrity: sha512-LbBerg7GaSPjYtTOnu41AMp7tV6efUNR3p4Wk5NzkSsNTBuA5mDGOfwwZL1jhhVMLx9V20HolIUo0+U3AXehbg==,
+      }
+    dev: true
+
   /through/2.3.8:
     resolution: { integrity: sha1-DdTJ/6q8NXlgsbckEV1+Doai4fU= }
     dev: true
@@ -4341,6 +4414,34 @@ packages:
 
   /uniqs/2.0.0:
     resolution: { integrity: sha1-/+3ks2slKQaW5uFl1KWe25mOawI= }
+    dev: true
+
+  /unist-util-is/5.1.1:
+    resolution:
+      {
+        integrity: sha512-F5CZ68eYzuSvJjGhCLPL3cYx45IxkqXSetCcRgUXtbcm50X2L9oOWQlfUfDdAf+6Pd27YDblBfdtmsThXmwpbQ==,
+      }
+    dev: true
+
+  /unist-util-visit-parents/5.1.0:
+    resolution:
+      {
+        integrity: sha512-y+QVLcY5eR/YVpqDsLf/xh9R3Q2Y4HxkZTp7ViLDU6WtJCEcPmRzW1gpdWDCDIqIlhuPDXOgttqPlykrHYDekg==,
+      }
+    dependencies:
+      '@types/unist': 2.0.6
+      unist-util-is: 5.1.1
+    dev: true
+
+  /unist-util-visit/4.1.0:
+    resolution:
+      {
+        integrity: sha512-n7lyhFKJfVZ9MnKtqbsqkQEk5P1KShj0+//V7mAcoI6bpbUjh3C/OG8HVD+pBihfh6Ovl01m8dkcv9HNqYajmQ==,
+      }
+    dependencies:
+      '@types/unist': 2.0.6
+      unist-util-is: 5.1.1
+      unist-util-visit-parents: 5.1.0
     dev: true
 
   /universalify/2.0.0:
