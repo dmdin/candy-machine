@@ -28,7 +28,7 @@ Create Candy Machine and connect it with frontend in a short
     ```
 4. Check __[Token Metadata Standard](https://docs.metaplex.com/nft-standard)__ and create your own collection
 5. Place all files of collection in _asset_ directory
-6. Get your private key location (you must install [Solana CLI](https://docs.solana.com/cli) and create wallet before)
+6. Get your private key location (you must install __[Solana CLI](https://docs.solana.com/cli)__ and create wallet before)
     ```shell
    $: solana config get 
     ```
