@@ -16,16 +16,17 @@ Create candy machine using __Metaplex__. Read tutorial about __[Metaplex CLI](ht
 Create Candy Machine and connect it with frontend in a short
 
 1. Clone the entire __[Metaplex](https://github.com/metaplex-foundation/metaplex)__ 
-2. Go to _js/packages_
+2. Install local dependencies and __[ts-node](https://typestrong.org/ts-node/)__
    ```shell
-   $: cd js/packages
-   ```
-3. Install local dependencies and __[ts-node](https://typestrong.org/ts-node/)__
-   ```shell
+   $: cd js
    $: npm install
    $: npm install -g typescript
    $: npm install -g ts-node
     ```
+3. Go to _js/packages_
+   ```shell
+   $: cd packages
+   ```
 4. Check __[Token Metadata Standard](https://docs.metaplex.com/nft-standard)__ and create your own collection
 5. Place all files of the collection in _assets_ directory
 6. Get your private key location (you must install __[Solana CLI](https://docs.solana.com/cli)__ and create wallet before)
