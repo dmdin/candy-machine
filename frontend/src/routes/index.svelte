@@ -10,7 +10,7 @@
 <Landing />
 
 <style>
-	/* :root {
+	:root {
 		background-color: rgb(22, 0, 41);
-	} */
+	}
 </style>
